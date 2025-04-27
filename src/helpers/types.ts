@@ -15,6 +15,17 @@ export interface IProducts {
 	image: string
 }
 
+export interface IKomboInput {
+	title: string
+	description: string
+	price: number
+	oldPrice: number
+	slug: string
+	image: string
+	showOldPrice: boolean
+	discount: number
+}
+
 export interface IKombo extends IProducts {
 	showOldPrice: boolean
 	discount: number

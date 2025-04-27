@@ -2,7 +2,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { useQuery } from '@tanstack/react-query'
 import { Button, Card, Col, Form, Input, Row, Space, Table } from 'antd'
 import { ICategories } from '../../helpers/types'
-import getCategories from '../../service/categories'
+import { getCategories } from '../../service/categories'
 
 const Categories = () => {
 	const [form] = Form.useForm()

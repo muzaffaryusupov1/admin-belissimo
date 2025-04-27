@@ -6,4 +6,4 @@ const getBanner = async (): Promise<IBanner[]> => {
 	return data
 }
 
-export default getBanner
+export { getBanner }

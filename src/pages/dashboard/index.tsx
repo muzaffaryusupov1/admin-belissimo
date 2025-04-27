@@ -1,8 +1,10 @@
 import { useQueries } from '@tanstack/react-query'
 import { Card, Col, Row, Skeleton, Typography } from 'antd'
 import { IContentDashbord } from '../../helpers/types'
-import { getBanner, getKombo, getProducts } from '../../service'
-import getCategories from '../../service/categories'
+import { getBanner } from '../../service/banner'
+import { getCategories } from '../../service/categories'
+import { getKombo } from '../../service/kombo'
+import { getProducts } from '../../service/products'
 const Dashboard = () => {
 	const result = useQueries({
 		queries: [

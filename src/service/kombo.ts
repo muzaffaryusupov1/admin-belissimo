@@ -1,9 +1,24 @@
 import Axios from '../api'
-import { IKombo } from '../helpers/types'
+import { IKombo, IKomboInput } from '../helpers/types'
 
 const getKombo = async (): Promise<IKombo[]> => {
 	const { data } = await Axios.get<IKombo[]>('/combos')
 	return data
 }
 
-export default getKombo
+const createKombo = async (newKombo: IKomboInput): Promise<IKombo> => {
+	const { data } = await Axios.post<IKombo>('/combos', newKombo)
+	return data
+}
+
+const deleteKombo = async (id: number) => {
+	const { data } = await Axios.delete(`/combos/${id}`)
+	return data
+}
+
+const updateKombo = async (id: number) => {
+	const { data } = await Axios.patch(`/combos/${id}`)
+	return data
+}
+
+export { createKombo, deleteKombo, getKombo, updateKombo }

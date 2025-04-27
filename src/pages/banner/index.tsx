@@ -2,7 +2,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { useQuery } from '@tanstack/react-query'
 import { Button, Card, Row } from 'antd'
 import { IBanner } from '../../helpers/types'
-import { getBanner } from '../../service'
+import { getBanner } from '../../service/banner'
 
 const Banner = () => {
 	const { data, isLoading } = useQuery<IBanner[], Error>({

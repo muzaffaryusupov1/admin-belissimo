@@ -6,4 +6,4 @@ const getProducts = async (): Promise<IProducts[]> => {
 	return data
 }
 
-export default getProducts
+export { getProducts }

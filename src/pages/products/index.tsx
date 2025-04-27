@@ -2,7 +2,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { useQuery } from '@tanstack/react-query'
 import { Button, Card, Image, Space, Table } from 'antd'
 import { IProducts } from '../../helpers/types'
-import { getProducts } from '../../service'
+import { getProducts } from '../../service/products'
 
 const Products = () => {
 	const columns = [

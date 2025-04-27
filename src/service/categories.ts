@@ -6,4 +6,4 @@ const getCategories = async (): Promise<ICategories[]> => {
 	return data
 }
 
-export default getCategories
+export { getCategories }
