@@ -1,0 +1,5 @@
+export { default as Banner } from './banner'
+export { default as Categories } from './categories'
+export { default as Dashboard } from './dashboard'
+export { default as Kombo } from './kombo'
+export { default as Products } from './products'
