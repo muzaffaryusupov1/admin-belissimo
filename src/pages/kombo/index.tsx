@@ -103,17 +103,19 @@ const Kombo = () => {
 		mutationFn: createKombo,
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['combos'] })
+			message.success('Item created was successfully')
+
 			setIsModalOpen(false)
 			form.resetFields()
 		},
 		onError: () => {
-			alert('Failed to add item!')
+			message.error('Failed to create item')
 		},
 	})
 
 	const handleFinish = (data: IKombo) => {
 		if (isUpdate) {
-			updateMutation.mutate(data.id)
+			updateMutation.mutate({ id: isUpdate, updatedData: { ...data, slug: slugify(title) } })
 		} else {
 			mutation.mutate({ ...data, slug: slugify(title) })
 		}
@@ -148,11 +150,11 @@ const Kombo = () => {
 				<Table dataSource={data} loading={isLoading} columns={columns} rowKey={'id'} />
 
 				<Drawer
-					title={'Products Add'}
+					title={isUpdate ? 'Update product' : 'Add product'}
 					onClose={handleCancel}
 					open={isModalOpen}
 					width={800}
-					extra={<Button onClick={handleSubmit}>Add</Button>}
+					extra={<Button onClick={handleSubmit}>{isUpdate ? 'Update' : 'Add'}</Button>}
 				>
 					<Form layout='vertical' form={form} onFinish={handleFinish}>
 						<KomboForm />

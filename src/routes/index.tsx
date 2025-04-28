@@ -1,4 +1,5 @@
 import { Banner, Categories, Dashboard, Kombo, Products } from '../pages'
+import Pitsa from '../pages/pitsa'
 
 export const router = [
 	{
@@ -25,5 +26,10 @@ export const router = [
 		id: 4,
 		path: '/kombo',
 		component: <Kombo />,
+	},
+	{
+		id: 4,
+		path: '/pizza',
+		component: <Pitsa />,
 	},
 ]

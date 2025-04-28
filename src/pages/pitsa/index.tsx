@@ -3,11 +3,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button, Card, Drawer, Form, Image, message, Modal, Space, Table } from 'antd'
 import { useState } from 'react'
 import { IProducts } from '../../helpers/types'
-import { createProduct, deleteProduct, getProducts, updateProduct } from '../../service/products'
-import ProductsForm from './components/ProductsForm'
+import { createPitsa, deletePitsa, getPitsa, updatePitsa } from '../../service/pitsa'
+import PitsaForm from './components/PitsaForm'
 
-const Products = () => {
-	const [productsOpen, setProductsOpen] = useState(false)
+const Pitsa = () => {
+	const [pitsaOpen, setPitsaOpen] = useState(false)
 	const [form] = Form.useForm()
 	const queryClient = useQueryClient()
 	const [isUpdate, setIsUpdate] = useState<number | null>(null)
@@ -15,13 +15,13 @@ const Products = () => {
 	const showDeleteConfirm = (id: number) => {
 		Modal.confirm({
 			icon: <ExclamationCircleFilled />,
-			title: 'Are you sure delete this product?',
+			title: 'Are you sure delete this item?',
 			content: 'This action cannot be undone.',
 			okText: 'Yes',
 			okType: 'danger',
 			cancelText: 'No',
 			onOk() {
-				deleteMutationProducts.mutate(id)
+				deleteMutationPitsa.mutate(id)
 			},
 			onCancel() {
 				console.log('cancel')
@@ -62,32 +62,20 @@ const Products = () => {
 		},
 	]
 
-	const closeProductsModal = () => {
-		setProductsOpen(false)
+	const closePitsaModal = () => {
+		setPitsaOpen(false)
 	}
 
-	const { data, isLoading } = useQuery({
-		queryKey: ['products'],
-		queryFn: getProducts,
-	})
-
 	const handleCancel = () => {
-		setProductsOpen(false)
+		setPitsaOpen(false)
 		setIsUpdate(null)
 		form.resetFields()
 	}
 
-	const productFinish = (data: IProducts) => {
-		if (isUpdate) {
-			updateMutationProduct.mutate({
-				id: isUpdate,
-				updatedProduct: data,
-			})
-		} else {
-			productCreate.mutate(data)
-		}
-		handleCancel()
-	}
+	const { data, isLoading } = useQuery({
+		queryKey: ['pizza'],
+		queryFn: getPitsa,
+	})
 
 	const handleUpdate = (data: IProducts) => {
 		form.setFieldsValue({
@@ -95,44 +83,52 @@ const Products = () => {
 			description: data.description,
 			price: data.price,
 			image: data.image,
-			slug: data.slug,
 		})
 		setIsUpdate(data.id)
-		setProductsOpen(true)
+		setPitsaOpen(true)
 	}
 
-	const productCreate = useMutation({
-		mutationFn: createProduct,
+	const handleFinish = (data: IProducts) => {
+		if (isUpdate) {
+			updateMutationPitsa.mutate({ id: isUpdate, updatedData: data })
+		} else {
+			pitsaCreate.mutate(data)
+		}
+		handleCancel()
+	}
+
+	const pitsaCreate = useMutation({
+		mutationFn: createPitsa,
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['products'] })
-			message.success('Product created was successfully')
+			queryClient.invalidateQueries({ queryKey: ['pizza'] })
+			message.success('Item created was successfully')
 			form.resetFields()
-			closeProductsModal()
+			closePitsaModal()
 		},
 		onError: () => {
-			message.error('Failed to create product')
+			message.error('Failed to create item')
 		},
 	})
 
-	const deleteMutationProducts = useMutation({
-		mutationFn: deleteProduct,
+	const deleteMutationPitsa = useMutation({
+		mutationFn: deletePitsa,
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['products'] })
-			message.success('Product deleted was successfully')
+			queryClient.invalidateQueries({ queryKey: ['pizza'] })
+			message.success('Item deleted was successfully')
 		},
 		onError: () => {
-			message.error('Failed to delete product')
+			message.error('Failed to delete item')
 		},
 	})
 
-	const updateMutationProduct = useMutation({
-		mutationFn: updateProduct,
+	const updateMutationPitsa = useMutation({
+		mutationFn: updatePitsa,
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['products'] })
-			message.success('Product updated was successfully')
+			queryClient.invalidateQueries({ queryKey: ['pizza'] })
+			message.success('Item updated was successfully')
 		},
 		onError: () => {
-			message.error('Failed to update product')
+			message.error('Failed to update item')
 		},
 	})
 
@@ -142,17 +138,17 @@ const Products = () => {
 
 	return (
 		<div>
-			<Card title='Products' extra={<Button onClick={() => setProductsOpen(true)}>+ Add</Button>}>
+			<Card title='Pizza' extra={<Button onClick={() => setPitsaOpen(true)}>+ Add</Button>}>
 				<Table dataSource={data} columns={columns} loading={isLoading} rowKey='id' />
 				<Drawer
-					onClose={closeProductsModal}
-					title={isUpdate ? 'Update product' : 'Add product'}
-					open={productsOpen}
+					onClose={closePitsaModal}
+					title={isUpdate ? 'Update pizza' : 'Add pizza'}
+					open={pitsaOpen}
 					width={800}
 					extra={<Button onClick={handleSubmit}>{isUpdate ? 'Update' : 'Add'}</Button>}
 				>
-					<Form layout='vertical' form={form} onFinish={productFinish}>
-						<ProductsForm />
+					<Form layout='vertical' form={form} onFinish={handleFinish}>
+						<PitsaForm />
 					</Form>
 				</Drawer>
 			</Card>
@@ -160,4 +156,4 @@ const Products = () => {
 	)
 }
 
-export default Products
+export default Pitsa

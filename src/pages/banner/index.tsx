@@ -13,11 +13,12 @@ const Banner = () => {
 	return (
 		<div>
 			<Card extra={<Button>+ Add</Button>} loading={isLoading}>
-				<Row gutter={[6, 46]}>
+				<Row gutter={6}>
 					{data?.map(({ id, image }) => (
 						<Card
 							hoverable
-							className='flex flex-col w-[400px] h-[300px]'
+							style={{ marginLeft: '20px' }}
+							className='flex flex-col w-[350px] h-[250px]'
 							cover={<img src={image} alt='banner' height={200} className='object-contain' />}
 							key={id}
 						>

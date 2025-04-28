@@ -16,8 +16,8 @@ const deleteKombo = async (id: number) => {
 	return data
 }
 
-const updateKombo = async (id: number) => {
-	const { data } = await Axios.patch(`/combos/${id}`)
+const updateKombo = async ({ id, updatedData }: { id: number; updatedData: Partial<IKombo> }) => {
+	const { data } = await Axios.patch(`/combos/${id}`, updatedData)
 	return data
 }
 
