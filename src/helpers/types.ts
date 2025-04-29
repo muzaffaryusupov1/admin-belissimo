@@ -41,3 +41,30 @@ export type ICategories = {
 	title: string
 	navigate: string
 }
+
+export interface IConstructor {
+	id: number
+	title: string
+	price: number
+	image: string
+}
+
+export interface IUser {
+	id: number
+	name: string
+	email: string
+	token: string
+}
+
+export interface AuthContextType {
+	user: IUser | null
+	login: (data: LoginInput) => void
+	logout: () => void
+	isLoading: boolean
+	error: string | null
+}
+
+export interface LoginInput {
+	name: string
+	password: string
+}

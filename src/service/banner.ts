@@ -6,4 +6,25 @@ const getBanner = async (): Promise<IBanner[]> => {
 	return data
 }
 
-export { getBanner }
+const createBanner = async (newBanner: IBanner): Promise<IBanner> => {
+	const { data } = await Axios.post<IBanner>('/banner', newBanner)
+	return data
+}
+
+const deleteBanner = async (id: number): Promise<IBanner> => {
+	const { data } = await Axios.delete<IBanner>(`/banner/${id}`)
+	return data
+}
+
+const updateBanner = async ({
+	id,
+	updatedBanner,
+}: {
+	id: number
+	updatedBanner: IBanner
+}): Promise<IBanner> => {
+	const { data } = await Axios.patch<IBanner>(`/banner/${id}`, updatedBanner)
+	return data
+}
+
+export { createBanner, deleteBanner, getBanner, updateBanner }

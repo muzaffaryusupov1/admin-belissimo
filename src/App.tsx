@@ -1,7 +1,7 @@
-import { AppLayout } from './components'
+import { Login } from './pages'
 
 const App = () => {
-	return <AppLayout />
+	return <Login />
 }
 
 export default App

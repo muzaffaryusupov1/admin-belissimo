@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import './assets/style/style.css'
+import { AuthProvider } from './context/AuthContext.tsx'
 
 const queryClient = new QueryClient()
 
@@ -12,7 +13,9 @@ createRoot(document.querySelector('.wrapper')!).render(
 	<StrictMode>
 		<BrowserRouter>
 			<QueryClientProvider client={queryClient}>
-				<App />
+				<AuthProvider>
+					<App />
+				</AuthProvider>
 			</QueryClientProvider>
 		</BrowserRouter>
 	</StrictMode>

@@ -1,6 +1,7 @@
 import {
 	AlignLeftOutlined,
 	AreaChartOutlined,
+	ContainerOutlined,
 	HomeOutlined,
 	InboxOutlined,
 	ProductOutlined,
@@ -28,6 +29,11 @@ export const menuItems = [
 		key: '/products',
 		icon: <ProductOutlined />,
 		label: <Link to='/products'>Products</Link>,
+	},
+	{
+		key: '/constructor',
+		icon: <ContainerOutlined />,
+		label: <Link to='/constructor'>Constructors</Link>,
 	},
 	{
 		key: '/categories',

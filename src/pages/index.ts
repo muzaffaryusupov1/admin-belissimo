@@ -1,5 +1,8 @@
+export { default as Login } from './auth/Login.tsx'
 export { default as Banner } from './banner'
 export { default as Categories } from './categories'
+export { default as Constructor } from './constructor'
 export { default as Dashboard } from './dashboard'
 export { default as Kombo } from './kombo'
+export { default as Pitsa } from './pitsa'
 export { default as Products } from './products'
