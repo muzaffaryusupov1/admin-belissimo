@@ -4,20 +4,35 @@ import { Content } from 'antd/es/layout/layout'
 import { useState } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { menuItems } from '../../helpers/menuItems'
+import { useAuth } from '../../hooks/useAuth'
 import { router } from '../../routes'
+
 const { Header, Sider } = Layout
+
 const AppLayout = () => {
 	const [collapsed, setCollapsed] = useState(false)
 	const location = useLocation()
+	const { logout } = useAuth()
 
 	return (
-		<Layout>
-			<Sider style={{ background: 'white' }} trigger={null} collapsible collapsed={collapsed}>
+		<Layout style={{ minHeight: '100%' }}>
+			<Sider
+				theme='dark'
+				style={{
+					minHeight: '100%',
+					paddingLeft: '20px',
+					paddingRight: '20px',
+				}}
+				width={280}
+				trigger={null}
+				collapsible
+				collapsed={collapsed}
+			>
 				<div className='w-full h-10 my-3 mx-auto'>
 					<img src='/site-logo.svg' alt='site icon' className='w-full h-full' />
 				</div>
 				<Menu
-					theme='light'
+					theme='dark'
 					mode='inline'
 					defaultSelectedKeys={[location.pathname]}
 					items={menuItems}
@@ -30,12 +45,14 @@ const AppLayout = () => {
 							type='text'
 							icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
 							onClick={() => setCollapsed(!collapsed)}
-							className='text-base w-16 h-16'
+							className='text-base w-16 h-16 text-white'
 						/>
-						<Button icon={<LogoutOutlined />}>Log out</Button>
+						<Button icon={<LogoutOutlined />} onClick={logout}>
+							Log out
+						</Button>
 					</div>
 				</Header>
-				<Content className='my-6 mx-4 p-6 min-h-[280px] bg-white rounded-lg'>
+				<Content className='my-6 mx-4 p-2 min-h-[280px] rounded-lg'>
 					<Routes>
 						{router.map(item => (
 							<Route path={item.path} key={item.id} element={item.component} />

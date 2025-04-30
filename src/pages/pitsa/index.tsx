@@ -1,10 +1,12 @@
-import { DeleteOutlined, EditOutlined, ExclamationCircleFilled } from '@ant-design/icons'
+import { ExclamationCircleFilled } from '@ant-design/icons'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Button, Card, Drawer, Form, Image, message, Modal, Space, Table } from 'antd'
+import { Button, Card, Col, Drawer, Form, Image, message, Modal, Row, Space } from 'antd'
 import { useState } from 'react'
 import { IProducts } from '../../helpers/types'
 import { createPitsa, deletePitsa, getPitsa, updatePitsa } from '../../service/pitsa'
 import PitsaForm from './components/PitsaForm'
+
+const { Meta } = Card
 
 const Pitsa = () => {
 	const [pitsaOpen, setPitsaOpen] = useState(false)
@@ -28,39 +30,6 @@ const Pitsa = () => {
 			},
 		})
 	}
-
-	const columns = [
-		{
-			title: 'Image',
-			dataIndex: 'image',
-			render: (image: string) => (
-				<Image src={image} width={150} height={70} style={{ objectFit: 'contain' }} />
-			),
-		},
-		{
-			title: 'Name',
-			dataIndex: 'title',
-		},
-		{
-			title: 'Price',
-			dataIndex: 'price',
-			render: (price: number) => <span>{price.toLocaleString()} so'm</span>,
-		},
-		{
-			title: 'More',
-			render: (item: IProducts) => (
-				<Space>
-					<Button icon={<EditOutlined />} title='Update' onClick={() => handleUpdate(item)} />
-					<Button
-						icon={<DeleteOutlined />}
-						title='Delete'
-						danger
-						onClick={() => showDeleteConfirm(item.id)}
-					/>
-				</Space>
-			),
-		},
-	]
 
 	const closePitsaModal = () => {
 		setPitsaOpen(false)
@@ -139,7 +108,23 @@ const Pitsa = () => {
 	return (
 		<div>
 			<Card title='Pizza' extra={<Button onClick={() => setPitsaOpen(true)}>+ Add</Button>}>
-				<Table dataSource={data} columns={columns} loading={isLoading} rowKey='id' />
+				<Row gutter={[16, 16]}>
+					{data?.map(item => (
+						<Col span={6} key={item.id}>
+							<Card loading={isLoading} hoverable>
+								<Image src={item.image} alt={`constructor-img${item.id}`} />
+								<Meta title={item.title} description={`${item.price.toLocaleString()} so'm`} />
+								<Space className='mt-5'>
+									<Button onClick={() => handleUpdate(item)}>Update</Button>
+									<Button danger onClick={() => showDeleteConfirm(item.id)}>
+										Delete
+									</Button>
+								</Space>
+							</Card>
+						</Col>
+					))}
+				</Row>
+
 				<Drawer
 					onClose={closePitsaModal}
 					title={isUpdate ? 'Update pizza' : 'Add pizza'}

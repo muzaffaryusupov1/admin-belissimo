@@ -117,7 +117,11 @@ const Constructor = () => {
 
 	return (
 		<div>
-			<Card title='Constructors' extra={<Button onClick={() => setOpen(true)}>+ Add</Button>}>
+			<Card
+				variant='borderless'
+				title='Constructors'
+				extra={<Button onClick={() => setOpen(true)}>+ Add</Button>}
+			>
 				<Row gutter={[16, 16]}>
 					{data?.map(item => (
 						<Col span={6} key={item.id}>

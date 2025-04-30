@@ -58,6 +58,8 @@ export interface IUser {
 
 export interface AuthContextType {
 	user: IUser | null
+	token: string
+	setToken: (token: string) => void
 	login: (data: LoginInput) => void
 	logout: () => void
 	isLoading: boolean

@@ -1,12 +1,16 @@
 import { useMutation } from '@tanstack/react-query'
-import { createContext, PropsWithChildren, useContext, useState } from 'react'
+import { createContext, PropsWithChildren, useState } from 'react'
 import Axios from '../api'
+import { getLocale } from '../helpers/helper'
 import { AuthContextType, IUser, LoginInput } from '../helpers/types'
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+// eslint-disable-next-line react-refresh/only-export-components
+export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: PropsWithChildren<object>) => {
 	const [user, setUser] = useState<IUser | null>(null)
+	const initialToken = getLocale('token') || ''
+	const [token, setToken] = useState<string>(initialToken)
 
 	const loginMutation = useMutation({
 		mutationFn: async (data: LoginInput) => {
@@ -15,6 +19,7 @@ export const AuthProvider = ({ children }: PropsWithChildren<object>) => {
 		},
 		onSuccess: data => {
 			setUser(data)
+			setToken(data.token)
 			localStorage.setItem('token', data.token)
 		},
 		onError: () => {
@@ -28,26 +33,23 @@ export const AuthProvider = ({ children }: PropsWithChildren<object>) => {
 
 	const logout = () => {
 		setUser(null)
+		setToken('')
 		localStorage.removeItem('token')
 	}
 
 	return (
 		<AuthContext.Provider
 			value={{
+				token,
+				setToken,
 				user,
 				login,
 				logout,
-				error: loginMutation.error ? 'Login Failed' : null,
+				error: loginMutation.error ? 'Email or Password is invalid' : null,
 				isLoading: loginMutation.isPending,
 			}}
 		>
 			{children}
 		</AuthContext.Provider>
 	)
-}
-
-export const useAuth = () => {
-	const context = useContext(AuthContext)
-	if (!context) throw new Error('useAuth must be used within an AuthProvider')
-	return context
 }
