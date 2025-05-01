@@ -130,7 +130,7 @@ const Pitsa = () => {
 				</Row>
 
 				<Drawer
-					onClose={closePitsaModal}
+					onClose={handleCancel}
 					title={isUpdate ? 'Update pizza' : 'Add pizza'}
 					open={pitsaOpen}
 					width={800}

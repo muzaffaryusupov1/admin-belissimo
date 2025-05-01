@@ -152,7 +152,7 @@ const Products = () => {
 					scroll={{ x: 'max-content' }}
 				/>
 				<Drawer
-					onClose={closeProductsModal}
+					onClose={handleCancel}
 					title={isUpdate ? 'Update product' : 'Add product'}
 					open={productsOpen}
 					width={800}
