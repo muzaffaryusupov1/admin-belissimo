@@ -7,7 +7,13 @@ import App from './App.tsx'
 import './assets/style/style.css'
 import { AuthProvider } from './context/AuthContext.tsx'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+		},
+	},
+})
 
 createRoot(document.querySelector('.wrapper')!).render(
 	<StrictMode>

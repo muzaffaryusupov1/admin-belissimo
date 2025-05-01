@@ -147,7 +147,14 @@ const Kombo = () => {
 	return (
 		<div>
 			<Card title='Kombo' extra={<Button onClick={handleOpen}>+ Add</Button>}>
-				<Table dataSource={data} loading={isLoading} columns={columns} rowKey={'id'} />
+				<Table
+					dataSource={data}
+					loading={isLoading}
+					columns={columns}
+					rowKey={'id'}
+					bordered
+					scroll={{ x: 'max-content' }}
+				/>
 
 				<Drawer
 					title={isUpdate ? 'Update product' : 'Add product'}

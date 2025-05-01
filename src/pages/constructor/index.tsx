@@ -124,7 +124,7 @@ const Constructor = () => {
 			>
 				<Row gutter={[16, 16]}>
 					{data?.map(item => (
-						<Col span={6} key={item.id}>
+						<Col span={24} lg={8} xl={6} md={12} key={item.id}>
 							<Card loading={isLoading} hoverable>
 								<Image src={item.image} alt={`constructor-img${item.id}`} />
 								<Meta title={item.title} description={`${item.price.toLocaleString()} so'm`} />

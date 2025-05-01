@@ -11,15 +11,47 @@ body,
 	background: url(/public/pizza-banner.jpg) no-repeat center left;
 	background-size: cover;
 }
-/* 
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
+
+.custom-button {
+	display: flex;
+}
+
+@media (width < 640px) {
+	.custom-button {
+		display: none;
 	}
-	50% {
-		background-position: 100% 50%;
+}
+
+.mobile-button {
+	display: none;
+	@media (width < 640px) {
+		display: flex;
 	}
-	100% {
-		background-position: 0% 50%;
+}
+
+.banner {
+	margin-left: 20px;
+}
+
+.banner:first-child {
+	margin-left: 0;
+}
+
+@media (width < 640px) {
+	.banner {
+		margin-left: 0;
 	}
-} */
+}
+
+.auth-card {
+	width: 400px;
+	margin-top: 20px;
+	border: 1px solid #f3d3ff;
+}
+
+@media (width < 640px) {
+	.auth-card {
+		width: 300px;
+		margin-top: 0;
+	}
+}

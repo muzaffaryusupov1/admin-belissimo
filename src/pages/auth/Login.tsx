@@ -27,7 +27,7 @@ const Login = () => {
 				</div>
 			)}
 			<div className='h-full flex w-full'>
-				<div className='bg-blue-500 w-[60%] login-bg flex items-center justify-center relative'>
+				<div className='bg-blue-500 w-[60%] login-bg flex items-center justify-center relative max-md:hidden'>
 					<div className='relative z-20'>
 						<Typography.Title level={1} style={{ color: 'white' }}>
 							Bellissimo Pizza
@@ -45,7 +45,7 @@ const Login = () => {
 				<div className='flex items-center justify-center mx-auto'>
 					<div>
 						{error && <Alert message={error} type='error' showIcon closable />}
-						<Card style={{ width: 400, marginTop: '20px', border: '1px solid #f3d3ff' }} hoverable>
+						<Card className='auth-card' hoverable>
 							<Typography.Title level={4} style={{ marginBottom: '4px' }}>
 								Hello!
 							</Typography.Title>

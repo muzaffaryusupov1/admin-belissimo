@@ -90,7 +90,7 @@ const Dashboard = () => {
 			<Typography.Title>Dashboard</Typography.Title>
 			<Row gutter={[12, 12]}>
 				{content.map(item => (
-					<Col span={6} key={item.id}>
+					<Col span={24} key={item.id} lg={8} md={12}>
 						<Card hoverable>
 							<Statistic
 								title={item.title}

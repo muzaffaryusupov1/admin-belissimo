@@ -143,7 +143,14 @@ const Products = () => {
 	return (
 		<div>
 			<Card title='Products' extra={<Button onClick={() => setProductsOpen(true)}>+ Add</Button>}>
-				<Table dataSource={data} columns={columns} loading={isLoading} rowKey='id' />
+				<Table
+					dataSource={data}
+					columns={columns}
+					loading={isLoading}
+					rowKey='id'
+					bordered
+					scroll={{ x: 'max-content' }}
+				/>
 				<Drawer
 					onClose={closeProductsModal}
 					title={isUpdate ? 'Update product' : 'Add product'}

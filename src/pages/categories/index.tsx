@@ -124,7 +124,7 @@ const Categories = () => {
 		<div>
 			<Card title='Categories'>
 				<Row gutter={[16, 16]}>
-					<Col span={8} className='border-r border-solid border-[#f0f0f0]'>
+					<Col span={24} lg={8} className='border-r border-solid border-[#f0f0f0]'>
 						<Form onFinish={handleFinish} layout='vertical' form={form}>
 							<Form.Item
 								label='Name'
@@ -166,7 +166,7 @@ const Categories = () => {
 							</Form.Item>
 						</Form>
 					</Col>
-					<Col span={16}>
+					<Col span={24} lg={16}>
 						<Table dataSource={data} loading={isLoading} columns={columns} rowKey={'id'} />
 					</Col>
 				</Row>

@@ -102,8 +102,7 @@ const Banner = () => {
 					{data?.map(item => (
 						<Card
 							hoverable
-							style={{ marginLeft: '20px' }}
-							className='flex flex-col w-[350px] h-[250px]'
+							className='flex flex-col w-[350px] h-[250px] max-md:w-full banner'
 							cover={<img src={item.image} alt='banner' height={200} className='object-contain' />}
 							key={item.id}
 						>
